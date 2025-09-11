@@ -1,8 +1,6 @@
 # calculator
 
-Project: Calculadora - The Odin Project
-
-Calculadora 🧮
+Project: Calculator - The Odin Project
 
 Uma calculadora funcional feita com HTML, CSS e JavaScript, desenvolvida como parte do currículo de JavaScript do curso The Odin Project.
 
@@ -12,37 +10,36 @@ Uma calculadora de quatro operações que simula o funcionamento de uma calculad
 
 🔧 Tecnologias Utilizadas
 
-HTML5
+- HTML5
 
-CSS3
+- CSS3
 
-JavaScript (ES6)
+- JavaScript
 
 ✨ Funcionalidades
 
-Operações básicas: adição, subtração, multiplicação e divisão.
+- Operações básicas: adição, subtração, multiplicação e divisão.
 
-Interface amigável com botões clicáveis.
+- Interface amigável com botões clicáveis.
 
-Suporte a teclado numérico.
+- Suporte a teclado numérico.
 
-Botão de reset (AC) e botão de apagar (DEL).
+- Botão de reset (AC) e botão de apagar (DEL).
 
-Tratamento de erros como divisão por zero.
+- Tratamento de erros como divisão por zero.
 
 🧠 O que eu aprendi
 
-Estruturar lógica de uma calculadora usando funções JavaScript.
+- Estruturar lógica de uma calculadora usando funções JavaScript.
 
-Manipular eventos de clique e teclado.
+- Manipular eventos de clique e teclado.
 
-Atualizar dinamicamente o conteúdo da interface com DOM.
+- Atualizar dinamicamente o conteúdo da interface com DOM.
 
-Organizar estilos com Flexbox para layout responsivo.
+- Organizar estilos com Flexbox para layout responsivo.
 
-Lidar com edge cases como múltiplos operadores e números decimais.
+- Lidar com edge cases como múltiplos operadores e números decimais.
 
 📚 Créditos
 
-Este projeto faz parte do curso Foundations do The Odin Project
-.
+Este projeto faz parte do curso Foundations do The Odin Project.
