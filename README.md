@@ -6,7 +6,9 @@ Uma calculadora funcional feita com HTML, CSS e JavaScript, desenvolvida como pa
 
 📝 Descrição
 
+
 Uma calculadora de quatro operações que simula o funcionamento de uma calculadora de mesa. O projeto foi desenvolvido para praticar lógica de programação, manipulação do DOM e eventos no navegador.
+
 
 🔧 Tecnologias Utilizadas
 
@@ -15,6 +17,7 @@ Uma calculadora de quatro operações que simula o funcionamento de uma calculad
 - CSS3
 
 - JavaScript
+
 
 ✨ Funcionalidades
 
@@ -28,6 +31,7 @@ Uma calculadora de quatro operações que simula o funcionamento de uma calculad
 
 - Tratamento de erros como divisão por zero.
 
+
 🧠 O que eu aprendi
 
 - Estruturar lógica de uma calculadora usando funções JavaScript.
@@ -39,6 +43,7 @@ Uma calculadora de quatro operações que simula o funcionamento de uma calculad
 - Organizar estilos com Flexbox para layout responsivo.
 
 - Lidar com edge cases como múltiplos operadores e números decimais.
+
 
 📚 Créditos
 
