@@ -47,13 +47,9 @@ function getNumbers() {
             if (operator === "") {
                 display.textContent += button.textContent;
                 n1 += button.textContent;
-
-                return n1;
             } else {
                 display.textContent += button.textContent;
                 n2 += button.textContent;
-
-                return n2;
             };
         });
     });
@@ -62,16 +58,30 @@ function getNumbers() {
 function getOperator() {
         document.querySelectorAll(".operators").forEach(button => {
             button.addEventListener("click", () => {
-                display.textContent += button.textContent
-                operator = button.textContent;
+                if (n1 === "") return;
 
-                return operator;
+                if (operator === "") {
+                    display.textContent += button.textContent
+                    operator = button.textContent;
+
+                } else {
+                    result = operate(n1, operator, n2);
+                    display.textContent = result;
+
+                    n1 = result;
+                    display.textContent += button.textContent
+                    operator = button.textContent;
+                    n2 = "";
+                    justCalculated = true;
+                }
             });
         });
     };
 
 function getResult() {
     document.querySelector(".equal").addEventListener("click", () => {
+        if (n1 === "" || operator === "" || n2 === "") return;
+
         result = operate(n1, operator, n2);
         display.textContent = result;
 
