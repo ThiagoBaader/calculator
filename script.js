@@ -2,8 +2,10 @@ let n1 = "";
 let n2 = "";
 let operator = "";
 let result = "";
-let justCalculated = false;
 const display = document.querySelector("#displayText");
+let justCalculated = false;
+let isSecondNumber = false;
+
 
 function add(n1, n2) {
     return n1 + n2;
@@ -48,6 +50,10 @@ function getNumbers() {
                 display.textContent += button.textContent;
                 n1 += button.textContent;
             } else {
+                if (!isSecondNumber) {
+                    clearDisplay();
+                    isSecondNumber = true;
+                }
                 display.textContent += button.textContent;
                 n2 += button.textContent;
             };
@@ -61,18 +67,22 @@ function getOperator() {
                 if (n1 === "") return;
 
                 if (operator === "") {
-                    display.textContent += button.textContent
                     operator = button.textContent;
+                    isSecondNumber = false;
 
                 } else {
-                    result = operate(n1, operator, n2);
-                    display.textContent = result;
+                    if (n2 !== "") {
+                        result = operate(n1, operator, n2);
+                        display.textContent = result;
 
-                    n1 = result;
-                    display.textContent += button.textContent
-                    operator = button.textContent;
-                    n2 = "";
-                    justCalculated = true;
+                        n1 = result;
+                        operator = button.textContent;
+                        n2 = "";
+                        justCalculated = true;
+                        isSecondNumber = false;
+                    } else {
+                        operator = button.textContent;
+                    }                    
                 }
             });
         });
