@@ -9,7 +9,7 @@ let isSecondNumber = false;
 
 function add(n1, n2) {
     return n1 + n2;
-}
+};
 
 function subtract(n1, n2) {
     return n1 - n2;
@@ -17,11 +17,11 @@ function subtract(n1, n2) {
 
 function multiply(n1, n2) {
     return n1 * n2;
-}
+};
 
 function divide(n1, n2) {
     return n1 / n2;
-}
+};
 
 function operate(n1, operator, n2) {
     n1 = Number(n1);
@@ -36,7 +36,7 @@ function operate(n1, operator, n2) {
     } else if (operator === "/") {
         return divide(n1, n2);
     }
-}
+};
 
 function getNumbers() {
     document.querySelectorAll(".numbers").forEach(button => {
@@ -82,8 +82,8 @@ function getOperator() {
                         isSecondNumber = false;
                     } else {
                         operator = button.textContent;
-                    }                    
-                }
+                    };                  
+                };
             });
         });
     };
@@ -102,10 +102,20 @@ function getResult() {
     });
 };
 
+function clear() {
+    document.querySelector(".clear").addEventListener("click", () => {
+        n1 = "";
+        operator = "";
+        n2 = "";
+        clearDisplay();
+    });
+};
+
 function clearDisplay() {
     display.textContent = "";
-}
+};
 
 getNumbers();
 getOperator();
 getResult();
+clear();
