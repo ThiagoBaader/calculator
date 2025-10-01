@@ -5,6 +5,7 @@ let result = "";
 const display = document.querySelector("#displayText");
 let justCalculated = false;
 let isSecondNumber = false;
+let decimalClicked = false;
 
 
 function add(n1, n2) {
@@ -57,6 +58,7 @@ function getNumbers() {
                 if (!isSecondNumber) {
                     clearDisplay();
                     isSecondNumber = true;
+                    decimalClicked = false;
                 }
                 display.textContent += button.textContent;
                 n2 += button.textContent;
@@ -86,8 +88,10 @@ function getOperator() {
                         isSecondNumber = false;
                     } else {
                         operator = button.textContent;
-                    };                  
+                    };             
                 };
+                
+                decimalClicked = false;
             });
         });
     };
@@ -103,6 +107,22 @@ function getResult() {
         operator = "";
         n2 = "";
         justCalculated = true;
+        decimalClicked = false;
+    });
+};
+
+function decimal() {
+    document.querySelector(".decimal").addEventListener("click",() => {
+        if (decimalClicked) return;
+
+        if (operator === "") {
+            n1 += ".";
+        } else {
+            n2 += ".";
+        }
+
+        display.textContent += ".";
+        decimalClicked = true;
     });
 };
 
@@ -111,6 +131,7 @@ function clear() {
         n1 = "";
         operator = "";
         n2 = "";
+        decimalClicked = false;
         clearDisplay();
     });
 };
@@ -122,4 +143,5 @@ function clearDisplay() {
 getNumbers();
 getOperator();
 getResult();
+decimal();
 clear();
