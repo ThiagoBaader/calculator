@@ -140,8 +140,29 @@ function clearDisplay() {
     display.textContent = "";
 };
 
+function backspace(){
+    document.querySelector(".backspace").addEventListener("click", () => {
+        if (display.textContent === "" || justCalculated) return;
+
+        let lastChar = display.textContent.slice(-1);
+
+        if (operator === "" || !isSecondNumber) {
+            n1 = n1.slice(0, -1);
+        } else {
+            n2 = n2.slice(0, -1);
+        };
+
+        display.textContent = display.textContent.slice(0, -1);
+
+        if (lastChar === ".") {
+            decimalClicked = false;
+        };
+    });
+};
+
 getNumbers();
 getOperator();
 getResult();
 decimal();
 clear();
+backspace();
