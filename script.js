@@ -7,10 +7,9 @@ let justCalculated = false;
 let isSecondNumber = false;
 let decimalClicked = false;
 
-
 function add(n1, n2) {
     return n1 + n2;
-};
+}
 
 function subtract(n1, n2) {
     return n1 - n2;
@@ -18,7 +17,7 @@ function subtract(n1, n2) {
 
 function multiply(n1, n2) {
     return n1 * n2;
-};
+}
 
 function divide(n1, n2) {
     if (n2 === 0) {
@@ -26,7 +25,7 @@ function divide(n1, n2) {
     } else {
         return n1 / n2;
     }
-};
+}
 
 function operate(n1, operator, n2) {
     n1 = Number(n1);
@@ -41,128 +40,149 @@ function operate(n1, operator, n2) {
     } else if (operator === "/") {
         return divide(n1, n2);
     }
-};
+}
 
-function getNumbers() {
-    document.querySelectorAll(".numbers").forEach(button => {
-        button.addEventListener("click", () => {
-            if (justCalculated && operator === "") {
-                display.textContent = "";
-                n1 = "";
-                justCalculated = false;
-            }
-            if (operator === "") {
-                display.textContent += button.textContent;
-                n1 += button.textContent;
-            } else {
-                if (!isSecondNumber) {
-                    clearDisplay();
-                    isSecondNumber = true;
-                    decimalClicked = false;
-                }
-                display.textContent += button.textContent;
-                n2 += button.textContent;
-            };
-        });
-    });
-};
+function handleNumberInput(digit) {
+    if (justCalculated && operator === "") {
+        display.textContent = "";
+        n1 = "";
+        justCalculated = false;
+    }
 
-function getOperator() {
-        document.querySelectorAll(".operators").forEach(button => {
-            button.addEventListener("click", () => {
-                if (n1 === "") return;
+    if (operator === "") {
+        display.textContent += digit;
+        n1 += digit;
+    } else {
+        if (!isSecondNumber) {
+            display.textContent = "";
+            isSecondNumber = true;
+            decimalClicked = false;
+        }
+        display.textContent += digit;
+        n2 += digit;
+    }
+}
 
-                if (operator === "") {
-                    operator = button.textContent;
-                    isSecondNumber = false;
+function handleOperatorInput(op) {
+    if (n1 === "") return;
 
-                } else {
-                    if (n2 !== "") {
-                        result = operate(n1, operator, n2);
-                        display.textContent = result;
+    if (operator === "") {
+        operator = op;
+        isSecondNumber = false;
 
-                        n1 = result;
-                        operator = button.textContent;
-                        n2 = "";
-                        justCalculated = true;
-                        isSecondNumber = false;
-                    } else {
-                        operator = button.textContent;
-                    };             
-                };
-                
-                decimalClicked = false;
-            });
-        });
+    } else {
+        if (n2 !== "") {
+            result = operate(n1, operator, n2);
+            display.textContent = result;
+
+            n1 = result;
+            operator = op;
+            n2 = "";
+            justCalculated = true;
+            isSecondNumber = false;
+        } else {
+            operator = op;
+        }            
+    }
+    
+    decimalClicked = false;
+}
+
+function handleDecimal() {
+    if (decimalClicked) return;
+
+    if (operator === "") {
+        n1 += ".";
+    } else {
+        n2 += ".";
+    }
+
+    display.textContent += ".";
+    decimalClicked = true;
+}
+
+function handleEqual() {
+    if (n1 === "" || operator === "" || n2 === "") return;
+
+    result = operate(n1, operator, n2);
+    display.textContent = result;
+
+    n1 = result;
+    operator = "";
+    n2 = "";
+    justCalculated = true;
+    decimalClicked = false;
+}
+
+function handleBackspace() {
+    if (display.textContent === "" || justCalculated) return;
+
+    let lastChar = display.textContent.slice(-1);
+
+    if (operator === "" || !isSecondNumber) {
+        n1 = n1.slice(0, -1);
+    } else {
+        n2 = n2.slice(0, -1);
     };
 
-function getResult() {
-    document.querySelector(".equal").addEventListener("click", () => {
-        if (n1 === "" || operator === "" || n2 === "") return;
+    display.textContent = display.textContent.slice(0, -1);
 
-        result = operate(n1, operator, n2);
-        display.textContent = result;
-
-        n1 = result;
-        operator = "";
-        n2 = "";
-        justCalculated = true;
+    if (lastChar === ".") {
         decimalClicked = false;
-    });
-};
+    };
+}
 
-function decimal() {
-    document.querySelector(".decimal").addEventListener("click",() => {
-        if (decimalClicked) return;
-
-        if (operator === "") {
-            n1 += ".";
-        } else {
-            n2 += ".";
-        }
-
-        display.textContent += ".";
-        decimalClicked = true;
-    });
-};
-
-function clear() {
-    document.querySelector(".clear").addEventListener("click", () => {
-        n1 = "";
-        operator = "";
-        n2 = "";
-        decimalClicked = false;
-        clearDisplay();
-    });
-};
-
-function clearDisplay() {
+function handleClear() {
+    n1 = "";
+    operator = "";
+    n2 = "";
+    decimalClicked = false;
     display.textContent = "";
-};
+}
 
-function backspace(){
-    document.querySelector(".backspace").addEventListener("click", () => {
-        if (display.textContent === "" || justCalculated) return;
-
-        let lastChar = display.textContent.slice(-1);
-
-        if (operator === "" || !isSecondNumber) {
-            n1 = n1.slice(0, -1);
-        } else {
-            n2 = n2.slice(0, -1);
-        };
-
-        display.textContent = display.textContent.slice(0, -1);
-
-        if (lastChar === ".") {
-            decimalClicked = false;
-        };
+function initNumberButtons() {
+    document.querySelectorAll(".numbers").forEach(button => {
+        button.addEventListener("click", () => {
+            handleNumberInput(button.textContent);
+        });
     });
-};
+}
 
-getNumbers();
-getOperator();
-getResult();
-decimal();
-clear();
-backspace();
+function initOperatorButtons() {
+    document.querySelectorAll(".operators").forEach(button => {
+        button.addEventListener("click", () => {
+            handleOperatorInput(button.textContent);
+        });
+    });
+}
+
+function initDecimalButton() {
+    document.querySelector(".decimal").addEventListener("click", () => {
+        handleDecimal();
+    });
+}
+
+function initEqualButton() {
+    document.querySelector(".equal").addEventListener("click", () => {
+        handleEqual();
+    });
+}
+
+function initBackspaceButton() {
+    document.querySelector(".backspace").addEventListener("click", () => {
+        handleBackspace();
+    });
+}
+
+function initClearButton() {
+    document.querySelector(".clear").addEventListener("click", () => {
+        handleClear();
+    });
+}
+
+initNumberButtons();
+initOperatorButtons();
+initDecimalButton();
+initEqualButton();
+initBackspaceButton();
+initClearButton();
