@@ -92,8 +92,10 @@ function handleDecimal() {
     if (decimalClicked) return;
 
     if (operator === "") {
+        if (n1 === "") n1 = "0";
         n1 += ".";
     } else {
+        if (n2 === "") n2 = "0";
         n2 += ".";
     }
 
@@ -105,8 +107,17 @@ function handleEqual() {
     if (n1 === "" || operator === "" || n2 === "") return;
 
     result = operate(n1, operator, n2);
-    display.textContent = result;
 
+    if (typeof result === "string") {
+        display.textContent = result;
+        n1 === "";
+        n2 === "";
+        operator = "";
+        justCalculated = true;
+        return;
+    }
+
+    display.textContent = result;
     n1 = result;
     operator = "";
     n2 = "";
@@ -180,9 +191,30 @@ function initClearButton() {
     });
 }
 
+function keyboard() {
+    document.addEventListener("keydown", (e) => {
+    const key = e.key;
+    
+    if (!isNaN(key)) {
+        handleNumberInput(key);
+    } else if (["+", "-", "*", "/"].includes(key)) {
+        handleOperatorInput(key);
+    } else if (key === "Enter") {
+        handleEqual();
+    } else if (key === ".") {
+        handleDecimal();
+    } else if (key === "Backspace") {
+        handleBackspace();
+    } else if (key === "Escape") {
+        handleClear();
+    }
+    });
+}
+
 initNumberButtons();
 initOperatorButtons();
 initDecimalButton();
 initEqualButton();
 initBackspaceButton();
 initClearButton();
+keyboard();
