@@ -5,7 +5,6 @@ let result = "";
 const display = document.querySelector("#displayText");
 let justCalculated = false;
 let isSecondNumber = false;
-let decimalClicked = false;
 
 function add(n1, n2) {
     return n1 + n2;
@@ -56,7 +55,6 @@ function handleNumberInput(digit) {
         if (!isSecondNumber) {
             display.textContent = "";
             isSecondNumber = true;
-            decimalClicked = false;
         }
         display.textContent += digit;
         n2 += digit;
@@ -84,23 +82,24 @@ function handleOperatorInput(op) {
             operator = op;
         }            
     }
-    
-    decimalClicked = false;
 }
 
 function handleDecimal() {
-    if (decimalClicked) return;
-
     if (operator === "") {
+        if (n1.includes(".")) return;
         if (n1 === "") n1 = "0";
         n1 += ".";
+        display.textContent += ".";
     } else {
+        if (n2.includes(".")) return;
+        if (!isSecondNumber) {
+            display.textContent = "";
+            isSecondNumber = true;
+        }
         if (n2 === "") n2 = "0";
         n2 += ".";
+        display.textContent += ".";
     }
-
-    display.textContent += ".";
-    decimalClicked = true;
 }
 
 function handleEqual() {
@@ -110,8 +109,8 @@ function handleEqual() {
 
     if (typeof result === "string") {
         display.textContent = result;
-        n1 === "";
-        n2 === "";
+        n1 = "";
+        n2 = "";
         operator = "";
         justCalculated = true;
         return;
@@ -122,7 +121,6 @@ function handleEqual() {
     operator = "";
     n2 = "";
     justCalculated = true;
-    decimalClicked = false;
 }
 
 function handleBackspace() {
@@ -130,24 +128,23 @@ function handleBackspace() {
 
     let lastChar = display.textContent.slice(-1);
 
+    display.textContent = display.textContent.slice(0, -1);
+
     if (operator === "" || !isSecondNumber) {
         n1 = n1.slice(0, -1);
     } else {
         n2 = n2.slice(0, -1);
     };
 
-    display.textContent = display.textContent.slice(0, -1);
-
-    if (lastChar === ".") {
-        decimalClicked = false;
-    };
+    if (["+", "-", "*", "/"].includes(lastChar)) {
+        operator = "";
+    }
 }
 
 function handleClear() {
     n1 = "";
     operator = "";
     n2 = "";
-    decimalClicked = false;
     display.textContent = "";
 }
 
