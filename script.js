@@ -31,12 +31,18 @@ function operate(n1, operator, n2) {
     n2 = Number(n2);
 
     switch(operator) {
-        case "+": return add(n1, n2);
-        case "-": return subtract(n1, n2);
-        case "*": return multiply(n1, n2);
-        case "/": return divide(n1, n2);
-        default: return 0;
+        case "+": result = add(n1, n2); break;
+        case "-": result = subtract(n1, n2); break;
+        case "*": result = multiply(n1, n2); break;
+        case "/": result = divide(n1, n2); break;
+        default: result = 0;
     }
+
+    if (typeof result === "number") {
+        result = parseFloat(result.toFixed(6));
+    }
+
+    return result;
 }
 
 function handleNumberInput(digit) {
