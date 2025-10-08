@@ -1,7 +1,6 @@
 let n1 = "";
 let n2 = "";
 let operator = "";
-let result = "";
 const display = document.querySelector("#displayText");
 let justCalculated = false;
 let isSecondNumber = false;
@@ -30,6 +29,7 @@ function operate(n1, operator, n2) {
     n1 = Number(n1);
     n2 = Number(n2);
 
+    let result;
     switch(operator) {
         case "+": result = add(n1, n2); break;
         case "-": result = subtract(n1, n2); break;
@@ -74,7 +74,7 @@ function handleOperatorInput(op) {
 
     } else {
         if (n2 !== "") {
-            result = operate(n1, operator, n2);
+            const result = operate(n1, operator, n2);
             display.textContent = result;
 
             n1 = result;
@@ -109,7 +109,7 @@ function handleDecimal() {
 function handleEqual() {
     if (n1 === "" || operator === "" || n2 === "") return;
 
-    result = operate(n1, operator, n2);
+    const result = operate(n1, operator, n2);
 
     if (typeof result === "string") {
         display.textContent = result;
