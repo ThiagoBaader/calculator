@@ -89,6 +89,12 @@ function handleOperatorInput(op) {
 }
 
 function handleDecimal() {
+    if (justCalculated && operator === "") {
+        display.textContent = "";
+        n1 = "";
+        justCalculated = false;
+    }
+
     if (operator === "") {
         if (n1.includes(".")) return;
         if (n1 === "") n1 = "0";
